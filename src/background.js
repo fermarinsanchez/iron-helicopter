@@ -13,7 +13,6 @@ class Background {
   }
 
   draw() {
-    // TODO: draw image
     this.ctx.drawImage(
       this.img,
       this.x,
@@ -29,12 +28,13 @@ class Background {
       this.w,
       this.h
     )
-
-    // TODO: draw image again on the right
   }
 
   move() {
-    // TODO: move background
-    // TODO: restart position if out of canvas
+    this.x += this.vx
+
+    if (this.x + this.w <= 0) {
+      this.x = 0
+    }
   }
 }

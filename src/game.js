@@ -12,9 +12,9 @@ class Game {
   start() {
     // TODO: loop. clear, draw, move, addObstacle, checkCollisions, clearObstacles
     this.intervalId = setInterval(() => {
-        this._clear()
-        this._draw()
-        this._move()
+      this._clear()
+      this._draw()
+      this._move()
     }, 1000 / 60)
   }
 
@@ -31,12 +31,12 @@ class Game {
   }
 
   _draw() {
-    // TODO: draw everything
     this.bg.draw()
+    this.helicopter.draw()
   }
 
   _move() {
-    // TODO: move everything
+    this.bg.move()
   }
 
   _checkCollisions() {
