@@ -65,6 +65,8 @@ class Helicopter {
 
     this.vx += this.ax
     this.x += this.vx
+
+    this.weapon.move()
   }
 
   _setListeners() {
