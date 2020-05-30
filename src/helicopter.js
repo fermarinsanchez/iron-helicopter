@@ -51,7 +51,12 @@ class Helicopter {
   }
 
   move() {
-    // TODO: move
+    this.vy += this.ay
+    this.vy += this.g
+    this.y += this.vy;
+
+    this.vx += this.ax
+    this.x += this.vx
   }
 
   _setListeners() {

@@ -37,6 +37,7 @@ class Game {
 
   _move() {
     this.bg.move()
+    this.helicopter.move()
   }
 
   _checkCollisions() {
