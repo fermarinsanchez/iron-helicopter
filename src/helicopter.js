@@ -48,8 +48,6 @@ class Helicopter {
       this.h
     )
 
-
-
     this.weapon.draw()
   }
 
@@ -71,16 +69,16 @@ class Helicopter {
 
   _setListeners() {
     document.addEventListener('keydown', e => {
-      this._switchActions(e.keyCode,true)
+      this._switchActions(e.keyCode, true)
     })
 
     document.addEventListener('keyup', e => {
-      this._switchActions(e.keyCode,false)
+      this._switchActions(e.keyCode, false)
     })
   }
 
   _switchActions(key, action) {
-    switch(key) {
+    switch (key) {
       case UP:
         this.actions.up = action
         break;
@@ -92,14 +90,19 @@ class Helicopter {
         break;
       case SPACE:
         this.actions.shoot = action
-        break; 
+        break;
     }
   }
 
   _setActions() {
-    this.ay = this.actions.up ? -0.2 : 0
-    
-    if ( this.actions.right) {
+    if (this.actions.up) {
+      this.ay = -0.2
+      this._animateSprite()
+    } else {
+      this.ay = 0
+    }
+
+    if (this.actions.right) {
       this.ax = 0.2
     } else if (this.actions.left) {
       this.ax = -0.2
@@ -109,6 +112,16 @@ class Helicopter {
 
     if (this.actions.shoot) {
       this.weapon.shoot()
+    }
+  }
+
+  _animateSprite() {
+    if (this.tick++ >= 5) {
+      this.tick = 0
+
+      if (this.img.frameIndex++ >= (this.img.frames - 1)) {
+        this.img.frameIndex = 0
+      }
     }
   }
 }

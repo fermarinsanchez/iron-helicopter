@@ -15,6 +15,12 @@ class Game {
       this._clear()
       this._draw()
       this._move()
+      this._addObstacle()
+
+      if (this.tick++ >= 10000) {
+        this.tick = 0;
+      }
+
     }, 1000 / 60)
   }
 
@@ -24,6 +30,9 @@ class Game {
 
   _addObstacle() {
     // TODO: add new Obstacle every 100 ticks
+    if (this.tick % 100 === 0) {
+      this.obstacles.push(new Obstacle(this.ctx))
+    }
   }
 
   _clear() {
@@ -33,12 +42,14 @@ class Game {
   _draw() {
     this.bg.draw()
     this.helicopter.draw()
+    this.obstacles.forEach(e => e.draw())
   }
 
   _move() {
     this.bg.move()
     this.helicopter.move()
-    
+    this.obstacles.forEach(e => e.move())
+
   }
 
   _checkCollisions() {
