@@ -61,7 +61,20 @@ class Helicopter {
 
   _setListeners() {
     document.addEventListener('keydown', e => {
-      // TODO
+      switch(e.keyCode) {
+        case UP:
+          this.ay = -0.2
+          break;
+        case LEFT:
+          this.ax = -0.2
+          break;
+        case RIGHT:
+          this.ax = 0.2
+          break;
+        case SPACE:
+          this.weapon.shoot()
+          break;
+      }
     })
 
     document.addEventListener('keyup', e => {
