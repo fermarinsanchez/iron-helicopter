@@ -16,7 +16,8 @@ class Game {
       this._draw()
       this._move()
       this._addObstacle()
-
+      this._clearObstacles()
+      this._checkCollisions()
       if (this.tick++ >= 10000) {
         this.tick = 0;
       }
@@ -25,7 +26,7 @@ class Game {
   }
 
   _clearObstacles() {
-    // TODO: filter only visible obstacles (call o.isVisible())
+    this.obstacles = this.obstacles.filter(b => b.isVisible())
   }
 
   _addObstacle() {
@@ -53,7 +54,7 @@ class Game {
   }
 
   _checkCollisions() {
-    // TODO: check helicopter on floor?
+    this.helicopter.isFloor()
     // TODO: iterate obstacles. check colX and colY
   }
 
