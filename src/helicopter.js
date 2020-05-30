@@ -32,10 +32,13 @@ class Helicopter {
     }
 
     this._setListeners()
+
+    this.fly = new Audio('http://www.sonidosmp3gratis.com/sounds/misc267.mp3')
+    this.shot = new Audio ('http://www.sonidosmp3gratis.com/sounds/MachineGunShells.mp3')
+    this.explosion = new Audio ('http://www.sonidosmp3gratis.com/sounds/001105163_prev.mp3')
   }
 
   draw() {
-    // TODO: draw helicopter image
     this.ctx.drawImage(
       this.img,
       0,
@@ -54,6 +57,7 @@ class Helicopter {
   isFloor() {
     if (this.y + this.h > this.ctx.canvas.height) {
       this.y = this.ctx.canvas.height - this.h
+      return true
     }
   }
 
@@ -92,6 +96,7 @@ class Helicopter {
         break;
       case SPACE:
         this.actions.shoot = action
+        this.shot.play()
         break;
     }
   }
@@ -100,8 +105,10 @@ class Helicopter {
     if (this.actions.up) {
       this.ay = -0.2
       this._animateSprite()
+      this.fly.play()
     } else {
       this.ay = 0
+      this.fly.pause()
     }
 
     if (this.actions.right) {
@@ -127,5 +134,3 @@ class Helicopter {
     }
   }
 }
-
-

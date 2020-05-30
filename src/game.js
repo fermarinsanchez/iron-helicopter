@@ -10,7 +10,6 @@ class Game {
   }
 
   start() {
-    // TODO: loop. clear, draw, move, addObstacle, checkCollisions, clearObstacles
     this.intervalId = setInterval(() => {
       this._clear()
       this._draw()
@@ -30,7 +29,6 @@ class Game {
   }
 
   _addObstacle() {
-    // TODO: add new Obstacle every 100 ticks
     if (this.tick % 100 === 0) {
       this.obstacles.push(new Obstacle(this.ctx))
     }
@@ -54,13 +52,20 @@ class Game {
   }
 
   _checkCollisions() {
-    this.helicopter.isFloor()
-    // TODO: iterate obstacles. check colX and colY
+    if (this.helicopter.isFloor()) this._gameOver()
+    this.obstacles.forEach(o => {
+      const colX = this.helicopter.x + this.helicopter.w > o.x && this.helicopter.x < o.x + o.w
+      const colY = this.helicopter.y + this.helicopter.h > o.y && this.helicopter.y < o.y + o.h 
+      if (colX && colY) {
+        this._gameOver()
+      }
+    })
   }
 
   _gameOver() {
     clearInterval(this.intervalId)
 
+    this.helicopter.explosion.play()
     this.ctx.font = "40px Comic Sans MS";
     this.ctx.textAlign = "center";
     this.ctx.fillText(
